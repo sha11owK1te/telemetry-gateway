@@ -1,0 +1,15 @@
+{
+  "scope": "localhost HTTP ingestion; run on an otherwise idle gateway",
+  "producers": 4,
+  "requests_per_producer": 25,
+  "frames_per_request": 10,
+  "accepted": 1000,
+  "dropped": 0,
+  "ingestion_seconds": 0.188,
+  "accepted_frames_per_second": 5320.01,
+  "request_latency_ms_p50": 0.825,
+  "request_latency_ms_p95": 15.037,
+  "stored_delta": 1000,
+  "storage_errors_delta": 0,
+  "total_drain_seconds": 0.2034
+}

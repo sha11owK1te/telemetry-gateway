@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pulse · 设备数据网关</title><link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script></head>
+<body>
+<aside class="sidebar">
+  <a class="brand" href="/" aria-label="Pulse 首页"><span class="brand-mark">∿</span>pulse<span class="brand-dot">.</span></a>
+  <div class="workspace"><span class="workspace-icon">P</span><div>Telemetry Lab<small>本地工作空间</small></div><span class="chevron">⌄</span></div>
+  <div class="nav-label">工作台</div>
+  <a class="nav-item active" href="#overview"><span>◫</span>数据概览<i>LIVE</i></a>
+  <a class="nav-item" href="#fleet"><span>▦</span>设备列表</a>
+  <a class="nav-item" href="#diagnostics"><span>⌁</span>链路诊断</a>
+  <div class="sidebar-bottom"><div class="signal-lines"><i></i><i></i><i></i><i></i></div><strong>让每一帧都有迹可循</strong><p>从字节流到设备洞察。<br>采集、验证、存储，一目了然。</p><span class="version">GATEWAY / v0.1.0</span></div>
+</aside>
+<div class="shell">
+  <header class="topbar"><span>工作台 <span class="slash">/</span> <strong>数据概览</strong></span><div class="top-right"><span class="connection" id="connection"><i></i>连接中</span><span class="divider"></span><span class="avatar">TK</span></div></header>
+  <main id="overview">
+    <section class="page-heading"><div><div class="eyebrow">DEVICE INTELLIGENCE</div><h1>每个设备，实时掌握<span>.</span></h1><p>查看遥测趋势，追踪链路健康，让设备数据持续流动。</p></div><div class="heading-actions"><button id="pause" class="button secondary">Ⅱ 暂停刷新</button><button id="export" class="button primary">↓ 导出数据</button></div></section>
+    <div class="notice" id="notice" role="status" hidden></div>
+    <section class="metrics" aria-label="关键指标">
+      <article class="metric"><div class="metric-label">在线设备<span class="metric-icon">▦</span></div><div class="metric-value"><span id="online">—</span><small id="device-total">/ —</small></div><div class="metric-foot"><span class="tiny-dot"></span>最近 5 秒收到有效数据</div></article>
+      <article class="metric"><div class="metric-label">本次成功存储<span class="metric-icon">⇄</span></div><div class="metric-value" id="stored">—</div><div class="metric-foot">累计接收 <strong id="bytes">—</strong> 字节</div></article>
+      <article class="metric"><div class="metric-label">CRC 校验错误<span class="metric-icon">⌁</span></div><div class="metric-value" id="crc">—</div><div class="metric-foot">半帧超时 <strong id="timeouts">—</strong> 次</div></article>
+      <article class="metric"><div class="metric-label">存储队列<span class="metric-icon">≋</span></div><div class="metric-value"><span id="queue">—</span><small id="queue-capacity">/ —</small></div><div class="queue-track"><span id="queue-bar"></span></div><div class="metric-foot">队列丢弃 <strong id="dropped">—</strong> 条</div></article>
+    </section>
+    <section class="charts-grid">
+      <article class="panel chart-panel"><div class="panel-heading"><div><h2>遥测趋势 <span class="live-tag">实时</span></h2><p id="chart-subtitle">选择设备，查看最近的温湿度数据</p></div><select id="device-select" aria-label="选择设备"><option value="">暂无设备</option></select></div><div class="chart-legend"><span><i class="legend-temp"></i>温度 °C</span><span><i class="legend-hum"></i>湿度 %</span><span class="chart-window">最近 120 条</span></div><div class="canvas-wrap"><canvas id="chart" aria-label="温度与湿度历史曲线" role="img"></canvas><div id="chart-empty" class="chart-empty">等待第一条数据<span>启动模拟器后，设备曲线会显示在这里</span></div></div><div class="chart-footer"><span>● 每秒更新</span><span id="last-updated">等待同步</span></div></article>
+      <article class="panel health-panel"><div class="panel-heading"><div><h2>数据链路</h2><p>从接收到持久化的完整路径</p></div><span class="subtle-badge">PIPELINE</span></div><div class="pipeline"><div class="pipeline-step"><div class="step-icon">↓</div><div><strong>字节接收</strong><small>按来源独立拼接数据</small></div><span id="pipe-sources">0 来源</span></div><div class="pipeline-line"></div><div class="pipeline-step"><div class="step-icon">✓</div><div><strong>帧校验</strong><small>CRC16 · 半帧超时</small></div><span id="pipe-frames">0 帧</span></div><div class="pipeline-line"></div><div class="pipeline-step"><div class="step-icon">≋</div><div><strong>有界队列</strong><small>存储拥塞时丢弃新数据</small></div><span id="pipe-peak">峰值 0</span></div><div class="pipeline-line"></div><div class="pipeline-step"><div class="step-icon">▤</div><div><strong>历史存储</strong><small>SQLite · 重启后保留</small></div><span id="pipe-rows">0 条</span></div></div><div class="health-summary"><span class="tiny-dot"></span><span id="health-text">等待数据流入</span></div></article>
+    </section>
+    <section id="fleet" class="panel fleet-panel"><div class="panel-heading"><div><h2>设备列表 <span class="count-badge" id="fleet-count">0</span></h2><p>点击设备查看对应的遥测曲线</p></div><span class="subtle-badge">模拟设备 / 主机验证</span></div><div class="table-wrap"><table><thead><tr><th>设备</th><th>状态</th><th>温度</th><th>湿度</th><th>序列号</th><th>最后接收</th><th></th></tr></thead><tbody id="device-rows"></tbody></table><div id="fleet-empty" class="empty-state">暂无设备接入。运行 <code>python scripts/simulator.py</code> 开始采集。</div></div></section>
+    <section id="diagnostics" class="diagnostics-grid"><article class="panel"><div class="panel-heading"><div><h2>链路诊断实验</h2><p>发送故障帧，观察解析器如何拒绝错误和回收半帧。</p></div><span class="lab-tag">LAB</span></div><div class="fault-actions"><button class="fault-button" data-fault="crc"><span>⌁</span><strong>CRC 错帧</strong><small>发送一帧被篡改的校验数据</small><b>注入 →</b></button><button class="fault-button" data-fault="timeout"><span>◷</span><strong>半帧超时</strong><small>仅发送帧头，等待自动回收</small><b>注入 →</b></button></div><p class="lab-note">实验使用独立输入来源，不改变模拟设备的数据。统计在进程重启后清零。</p></article><article class="panel"><div class="panel-heading"><div><h2>最近事件</h2><p>解析异常与网关运行状态</p></div><span id="event-count" class="count-badge">0</span></div><div id="events" class="events"></div></article></section>
+    <footer>Pulse Telemetry Gateway <span>本地运行 · 无需开发板</span><span id="uptime">UPTIME —</span></footer>
+  </main>
+</div>
+</body></html>

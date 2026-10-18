@@ -1,0 +1,38 @@
+{
+  "httplib.h": {
+    "url": "https://github.com/yhirose/cpp-httplib/blob/v0.61.0/httplib.h",
+    "sha256": "bc77114769db3b3c97e4a6d753dab797c3cadaaa48beead3806298b09702df18"
+  },
+  "httplib-LICENSE": {
+    "url": "https://github.com/yhirose/cpp-httplib/blob/v0.61.0/LICENSE",
+    "sha256": "4b45cbe16d7b71b89ae6127e26e0d90a029198ca5e958ad8e3d0b8bbed364d8b"
+  },
+  "json.hpp": {
+    "url": "https://github.com/nlohmann/json/blob/v3.12.0/single_include/nlohmann/json.hpp",
+    "sha256": "aaf127c04cb31c406e5b04a63f1ae89369fccde6d8fa7cdda1ed4f32dfc5de63"
+  },
+  "json-LICENSE": {
+    "url": "https://github.com/nlohmann/json/blob/v3.12.0/LICENSE.MIT",
+    "sha256": "b34025ec44b080b51e0197668af52ab54579dbe9e59d72a779ff5f3d926d4a87"
+  },
+  "sqlite3.c": {
+    "url": "https://www.sqlite.org/2026/sqlite-amalgamation-3540100.zip",
+    "sha256": "0c657666d819f261cc4007526ad57e1669de9949df7a8ea847aa284a2bf0ee52"
+  },
+  "sqlite3.h": {
+    "url": "https://www.sqlite.org/2026/sqlite-amalgamation-3540100.zip",
+    "sha256": "d6c84557261893439b341d2e6c35187ae3ea24fbfd843ad94616f72d89242b8c"
+  },
+  "serial-frame/serial_frame.c": {
+    "url": "https://github.com/sha11owK1te/serial-frame/tree/669a629b8ddcf6eb427a1a361d55d9a14ed9acc9/c",
+    "sha256": "71d7fce884c3e76ac340f3101da99a8ac10e034b417cc17ecbd5c433069f9cdb"
+  },
+  "serial-frame/serial_frame.h": {
+    "url": "https://github.com/sha11owK1te/serial-frame/tree/669a629b8ddcf6eb427a1a361d55d9a14ed9acc9/c",
+    "sha256": "06fdcdf0ad210f6e3009d9ff7459d2d7cc8970ffe38dd6122d0ac80054fd6419"
+  },
+  "serial-frame/LICENSE": {
+    "url": "https://github.com/sha11owK1te/serial-frame/tree/669a629b8ddcf6eb427a1a361d55d9a14ed9acc9/c",
+    "sha256": "2b7a94198dfed36aea1f3656c3c28e60dbc103e5d407441909480fb5efe678a0"
+  }
+}
